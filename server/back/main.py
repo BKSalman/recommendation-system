@@ -98,10 +98,10 @@ def get_movie_metadata(movie_id: str):
     return response.json()["Poster"]
 
 
-@app.get("/api/recommend")
-def get_recommendation(recommend: Recommend):
+@app.get("/api/recommend/{user_id}")
+def get_recommendation(user_id: int):
     top_recommendations = get_recommendations(MOVIE_RATINGS, MOVIE_METADATA,
-                                              recommend.user_id, 10, LOADED_MODEL)
+                                              user_id, 10, LOADED_MODEL)
 
     return top_recommendations
 

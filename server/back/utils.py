@@ -20,10 +20,12 @@ def get_recommendations(data, movie_md, user_id, top_n, algo):
         # appending the predicted ratings
         movie_name = movie_md[movie_md['id']
                               == str(item_id)]['title'].values[0]
-        recommendations.append((movie_name, est))
+        movie_id = movie_md[movie_md['id']
+                            == str(item_id)]['id'].values[0]
+        recommendations.append((movie_id, movie_name, est))
 
     # sorting the predicted ratings in descending order
-    recommendations.sort(key=lambda x: x[1], reverse=True)
+    recommendations.sort(key=lambda x: x[2], reverse=True)
 
     # returing top n highest predicted rating products for this user
     return recommendations[:top_n]
